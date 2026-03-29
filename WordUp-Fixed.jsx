@@ -411,7 +411,7 @@ const WORDS=[
 /* ── STATE ──────────────────────────────────────────────────────────────── */
 const INIT = () => {
   try {
-    const r = localStorage.getItem("wu5");
+    const r = localStorage.getItem("engwords") || localStorage.getItem("wu5");
     if (r) { const p = JSON.parse(r); return { ...p, words: WORDS.map(w=>({...w,...(p.words?.find(x=>x.id===w.id)||{})})) }; }
   } catch {}
   return { words:[...WORDS], xp:0, streak:0, lastDate:null, dailyGoal:10, dailyDone:0, showTurkish:false, history:[], failedIds:[], achievements:[] };
@@ -682,7 +682,45 @@ const Home=({s,dispatch,go,onXP})=>{
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18}}>
           <div>
             <div style={{fontSize:12,color:"var(--ink3)",fontWeight:800,marginBottom:1,fontFamily:"'Nunito',sans-serif"}}>Hoş geldin! 👋</div>
-            <div style={{fontFamily:"'Fredoka',sans-serif",fontSize:28,fontWeight:700,color:"var(--ink)",letterSpacing:".3px"}}>WordUp 🎓</div>
+            <div style={{display:"flex",alignItems:"center",gap:10}}>
+              <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{filter:"drop-shadow(0 3px 0 #8B3A1A)"}}>
+                {/* Body */}
+                <rect x="12" y="30" width="76" height="62" rx="22" fill="#C1521E"/>
+                {/* Left ear */}
+                <ellipse cx="28" cy="20" rx="11" ry="16" fill="#C1521E"/>
+                <ellipse cx="28" cy="22" rx="6" ry="10" fill="#E07040"/>
+                {/* Right ear */}
+                <ellipse cx="72" cy="20" rx="11" ry="16" fill="#C1521E"/>
+                <ellipse cx="72" cy="22" rx="6" ry="10" fill="#E07040"/>
+                {/* Fluffy hair */}
+                <ellipse cx="50" cy="26" rx="14" ry="10" fill="#D46030"/>
+                <ellipse cx="42" cy="24" rx="8" ry="7" fill="#D46030"/>
+                <ellipse cx="58" cy="24" rx="8" ry="7" fill="#D46030"/>
+                <ellipse cx="50" cy="22" rx="10" ry="8" fill="#D46030"/>
+                {/* Face base highlight */}
+                <ellipse cx="50" cy="55" rx="33" ry="30" fill="#C85A22"/>
+                {/* Left eye white */}
+                <ellipse cx="37" cy="50" rx="10" ry="12" fill="white" stroke="#5A2800" strokeWidth="2"/>
+                {/* Left pupil */}
+                <ellipse cx="37" cy="52" rx="6" ry="8" fill="#1A0A00"/>
+                {/* Left eye shine */}
+                <ellipse cx="40" cy="48" rx="2.5" ry="3" fill="white"/>
+                {/* Right eye white */}
+                <ellipse cx="63" cy="50" rx="10" ry="12" fill="white" stroke="#5A2800" strokeWidth="2"/>
+                {/* Right pupil */}
+                <ellipse cx="63" cy="52" rx="6" ry="8" fill="#1A0A00"/>
+                {/* Right eye shine */}
+                <ellipse cx="66" cy="48" rx="2.5" ry="3" fill="white"/>
+                {/* Muzzle */}
+                <ellipse cx="50" cy="72" rx="18" ry="14" fill="#D97040"/>
+                {/* Nostrils */}
+                <ellipse cx="44" cy="70" rx="3" ry="2.5" fill="#B04020"/>
+                <ellipse cx="56" cy="70" rx="3" ry="2.5" fill="#B04020"/>
+                {/* Smile */}
+                <path d="M43 78 Q50 84 57 78" stroke="#B04020" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+              </svg>
+              <div style={{fontFamily:"'Fredoka',sans-serif",fontSize:28,fontWeight:700,color:"var(--ink)",letterSpacing:".3px"}}>EngWords</div>
+            </div>
           </div>
           <div style={{display:"flex",gap:8}}>
             <div style={{display:"flex",alignItems:"center",gap:5,background:"var(--peach)",border:"2.5px solid var(--orange)",borderRadius:50,padding:"7px 14px",boxShadow:"0 3px 0 var(--orange-d)"}}>
@@ -1101,7 +1139,7 @@ export default function App() {
   const [screen,setScreen]=useState("home");
   const [xpPop,setXpPop]=useState(null);
 
-  useEffect(()=>{try{localStorage.setItem("wu5",JSON.stringify(s));}catch{}},[s]);
+  useEffect(()=>{try{localStorage.setItem("engwords",JSON.stringify(s));}catch{}},[s]);
   const onXP=useCallback(n=>setXpPop({n,k:Date.now()}),[]);
 
   const NAV=[
